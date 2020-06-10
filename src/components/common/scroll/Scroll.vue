@@ -12,11 +12,11 @@
     props: {
       probeType: {
         type: Number,
-        default: 0
+        default: 1
       },
       pullUpLoad: {
         type: Boolean,
-        default: false
+        default: true
       }
     },
     data() {
@@ -33,18 +33,18 @@
         probeType: this.probeType,
         pullUpLoad: this.pullUpLoad
       })
-      //传出 监听滚动的位置 x，y 的事件
-      this.scroll.on('scroll', (position) => {
+      //传出 监听滚动的位置 x，y 的事件 需要设置 probetype
+      this.scroll.on('scroll', position => {
         this.$emit('scroll', position)
       })
-      //传出  上拉显示更多的事件
+      //传出  上拉显示更多的事件  需要设置pullupload
       this.scroll.on('pullingUp', () => {
-        this.$emit('pullingUp')
+        this.$emit('pullingup')
       })
     },
     methods: {
       //返回顶部的方法封装
-      scrollTo(x, y, time = 500) {
+      scrollTo(x, y, time) {
         this.scroll && this.scroll.scrollTo(x, y, time)
       },
       //多次上拉显示的方法封装

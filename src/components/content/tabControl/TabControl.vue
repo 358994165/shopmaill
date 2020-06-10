@@ -35,7 +35,6 @@
 
 <style scoped>
   .tab-control {
-    z-index: 8;
     display: flex;
     text-align: center;
     font-size: 15px;

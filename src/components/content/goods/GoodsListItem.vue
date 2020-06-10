@@ -1,6 +1,6 @@
 <template>
-  <div class="goods-item">
-    <img :src="goodsItem.show.img" alt="" @load='itemimgload'>
+  <div class="goods-item" @click='siclick'>
+    <img :src="showImage" alt="" @load='itemimgload'>
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.price}}</span>
@@ -20,11 +20,18 @@
         }
       }
     },
+    computed: {
+      showImage() {
+        return this.goodsItem.image || this.goodsItem.show.img
+      }
+    },
     methods: {
       itemimgload() {
         //图片加载完后，传出事件到事件总线中
-
         this.$bus.$emit('itemimgload')
+      },
+      siclick() {
+        this.$router.push('/detail/' + this.goodsItem.iid)
       }
     }
   }
