@@ -8,7 +8,6 @@
         @click="titleClick(index)">
         {{item}}</div>
     </div>
-    </div>
   </nav-bar>
 </template>
 

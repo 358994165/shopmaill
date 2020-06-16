@@ -20,7 +20,7 @@
       <goods-list ref='recommend' :goods='recommends' />
     </scroll>
     <back-top @click.native='backclick' v-show='isshowbacktop'></back-top>
-    <detail-bottom-bar class="bottombar" />
+    <detail-bottom-bar class="bottombar" @addToCart='addToCart' />
   </div>
 </template>
 
@@ -42,7 +42,6 @@
   import DetailBottomBar from './childComps/DetailBottomBar'
   //导入封装好的goodslist 传入新的参数 显示热门推荐
   import GoodsList from 'components/content/goods/GoodsList'
-
   //导入混入
   import { itemListenerMinxin, backTopMixin } from 'common/mixin'
 
@@ -64,7 +63,7 @@
       DetailParamInfo,
       DetailCommentInfo,
       GoodsList,
-      DetailBottomBar
+      DetailBottomBar,
     },
     data() {
       return {
@@ -146,6 +145,7 @@
       contentscroll(position) {
         //放回顶部的设置都在mixin中backTopMixin
         this.isshowbacktop = -position.y > 1000
+
         const positionY = -position.y
         let length = this.themeTopYs.length
         for (let i = 0; i < length - 1; i++) {
@@ -154,6 +154,23 @@
             this.$refs.nav.currentIndex = this.currentIndex
           }
         }
+      },
+      addToCart() {
+        //点击加入购物车
+        //获取商品数据用于购物车显示
+        const product = {}
+        product.image = this.topImage[0]
+        product.title = this.goods.title
+        product.desc = this.goods.desc
+        product.price = this.goods.realPrice
+        product.iid = this.iid
+        // this.$store.commit('addCart', product)
+        //在vuex actions中设置异步回调函数来判断商品是否已经添加到购物车
+        this.$store.dispatch('addCart', product).then(res => {
+          // console.log(this.$toast)
+          //使用 toast组件方法弹窗显示
+          this.$toast.show(res, 1500)
+        })
       }
     },
   }

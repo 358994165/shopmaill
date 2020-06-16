@@ -49,8 +49,8 @@
   .tab-bar-item {
     text-align: center;
     flex: 1;
-    height: 49px;
-    font-size: 14px;
+    height: 44px;
+    font-size: 13px;
   }
 
   .tab-bar-item img {

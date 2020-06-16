@@ -188,6 +188,7 @@
       loadMore() {
         //上拉显示更多
         this.getHomeGoods(this.currentType);
+        this.$refs.scroll.refresh()
       },
       swiperImageLoad() {
         //获取第二个分类栏距离顶部的距离 来决定要不要显示第一个分类栏
@@ -213,7 +214,7 @@
     top: 44px;
     right: 0;
     left: 0;
-    bottom: 49px;
+    bottom: 43px;
     overflow: hidden;
   }
 
